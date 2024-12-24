@@ -27,8 +27,8 @@ const HomePage = () => {
   };
 
   return (
-    <div style={style}>
-      <div className="">
+    <div style={style} className="overflow-auto scrollbar-none">
+      <div className="flex flex-col  mx-auto  z-[999]">
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
             <Route

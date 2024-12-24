@@ -32,10 +32,10 @@ const InteractiveBackground = () => {
     backgroundImage: `url(${background})`,
     backgroundSize: "200px 200px",
     backgroundRepeat: "repeat",
-    minHeight: "100vh",
-    width: "100%",
+    height: "100vh",
+    width: "100vw", 
     position: "relative",
-    overflowX: "hidden",
+    overflow: "hidden",
   };
 
   const generateTrailStyle = (index, position) => {
@@ -43,15 +43,18 @@ const InteractiveBackground = () => {
     const scaleFactor = isMoving ? 1 - index * 0.05 : 0;
     const opacityFactor = isMoving ? 1 - index * 0 : 0;
 
+
+    const clampedX = Math.max(0, Math.min(window.innerWidth - 20, position.x));
+    const clampedY = Math.max(0, Math.min(window.innerHeight - 20, position.y));
+
     return {
       position: "absolute",
-      left: position.x - 10,
-      top: position.y - 10,
+      left: clampedX - 10,
+      top: clampedY - 10,
       width: `${20 + index * 2}px`,
       height: `${20 + index * 2}px`,
       background: `radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(0, 0, 0, 0) 70%)`,
       borderRadius: "50%",
-      boxShadow: "0 0 10px (64,64,64)",
       pointerEvents: "none",
       zIndex: 10 - index,
       animation: `rotate-scale ${2 + delayFactor}s infinite linear`,
@@ -75,10 +78,7 @@ const InteractiveBackground = () => {
       <style>{keyframesStyle}</style>
       <div style={backgroundStyle}>
         {cursorTrail.map((position, index) => (
-          <div
-            key={index}
-            style={generateTrailStyle(index, position)}
-          ></div>
+          <div key={index} style={generateTrailStyle(index, position)}></div>
         ))}
         <App />
       </div>
