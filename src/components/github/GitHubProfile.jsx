@@ -9,7 +9,7 @@ const GitHubProfile = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const username = process.env.USER_NAME;
+    const username = "ajju0211";
     const token = process.env.GITHUB_TOKEN;
 
     const navigate = useNavigate();
