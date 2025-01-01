@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { User2,Loader2, Lock, RefreshCcw,Mail,Linkedin } from "lucide-react";
 import 'tailwindcss/tailwind.css';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const GitHubProfile = () => {
     const [profileData, setProfileData] = useState(null);
@@ -9,8 +10,8 @@ const GitHubProfile = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+
     const username = "ajju0211";
-    const token = process.env.GITHUB_TOKEN;
 
     const navigate = useNavigate();
 
@@ -21,37 +22,22 @@ const GitHubProfile = () => {
     useEffect(() => {
         const fetchProfileAndRepos = async () => {
             try {
-                const headers = {
-                    Authorization: `Bearer ${token}`,
-                };
-
                 // Fetch user profile
-                const profileResponse = await fetch(`https://api.github.com/users/${username}`, { headers });
-                if (!profileResponse.ok) {
-                    throw new Error('User not found');
-                }
-                const profileData = await profileResponse.json();
-                setProfileData(profileData);
-
+                const profileResponse = await axios.get(`https://api.github.com/users/${username}`);
+                setProfileData(profileResponse.data);
+    
                 // Fetch user repositories
-                const reposResponse = await fetch(
-                    `https://api.github.com/users/${username}/repos?per_page=100`,
-                    { headers }
-                );
-                if (!reposResponse.ok) {
-                    throw new Error('Repositories not found');
-                }
-                const reposData = await reposResponse.json();
-                setRepos(reposData);
+                const reposResponse = await axios.get(`https://api.github.com/users/${username}/repos?per_page=100`);
+                setRepos(reposResponse.data);
             } catch (error) {
-                setError(error.message);
+                setError(error.response?.data?.message || error.message || 'An error occurred');
             } finally {
                 setLoading(false);
             }
         };
-
+    
         fetchProfileAndRepos();
-    }, [username, token]);
+    }, [username]);
 
     if (loading) {
         return (
