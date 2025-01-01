@@ -19,6 +19,7 @@ import cplus from "./c++.png";
 import express from "./express.png";
 import photo from "./photo.png";
 import background from "./background.jpg";
+import cv from "./resume.jpg";
 import backicon from "./backicon.png";
 
 export {
@@ -43,5 +44,6 @@ export {
   express,
   photo,
   background,
-  backicon
+  backicon,
+  cv
 };

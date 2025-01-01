@@ -1,27 +1,29 @@
-import React from 'react'
+import React  from 'react'
 import { Lock, RefreshCcw } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
+import { cv } from '../../assets';
 
-const Laout = (prop) => {
-    const navigate = useNavigate();
+const Layout = ({prop , children}) => {
+    const navigator = useNavigate();
+    const onhandleButtonClick = () => {
+        navigator('/');
+    }
 
-    const handleButtonClick = () => {
-      navigate('/');
-    };
   return (
     <div className="flex items-center justify-center h-screen w-screen p-2">
     <div
-        className="flex flex-col bg-[#3c3c3c] bg-opacity-100  border-[#828282] shadow-black rounded-[10px] mb-20 md:h-[80%] md:w-[80%] h-[80%] w-[100%]"
+        className="flex flex-col bg-[#3c3c3c] bg-opacity-100  border-[#828282] shadow-black rounded-[10px] mb-20 md:h-[80%] md:w-[90%] xl:w-[40%] h-[80%] w-[100%]"
         style={{ boxShadow: "1px 10px 90px 10px rgba(255, 255, 255,0.1)" }}
     >
         <div className="bg-[rgb(40,39,39)] h-10 rounded-tl-[10px] flex items-center justify-evenly pl-5 rounded-tr-[10px] w-full">
-            <div className="flex md:ml-[-32%] lg:ml-[-38%] ml-[-15%] relative items-center justify-center gap-2">
-                <div className="h-3 w-3 rounded-[100%] bg-[#ff0000] cursor-pointer" onClick={handleButtonClick}></div>
+            <div className="flex md:ml-[-22%] lg:ml-[-28%] ml-[-15%] relative items-center justify-center gap-2">
+                <div className="h-3 w-3 rounded-[100%] bg-[#ff0000] cursor-pointer" onClick={onhandleButtonClick} ></div>
                 <div className="h-3 w-3 rounded-[100%] bg-[#ffcc00]"></div>
                 <div className="h-3 w-3 rounded-[100%] bg-[#00ff00]"></div>
+                
             </div>
-            <div className="flex flex-row bg-[#3c3c3c] bg-opacity-100 items-center justify-center  border-[#828282] shadow-black rounded-[8px] md:h-[70%] sm:w-[30%] md:w-[38%] lg:w-[30%] xl:w-[15%] h-[70%] w-[60%]">
-                <div className="inset-y-0 flex-row  justify-evenly h-full w-full left-0 pl-3 flex items-center pointer-events-none">
+            <div className="flex flex-row bg-[#3c3c3c] bg-opacity-100 items-center justify-center  border-[#828282] shadow-black rounded-[8px] md:h-[70%] sm:w-[30%] md:w-[38%] lg:w-[30%] xl:w-[25%] h-[70%] w-[60%]">
+                <div className="inset-y-0 flex-row  justify-evenly h-full w-[100%] left-0 pl-3 flex items-center pointer-events-none">
                     <div className="flex flex-row items-center justify-start gap-3">
                     <Lock
                         className="size-4 text-[#828282] hover:text-gray-300 transition-colors duration-300"
@@ -30,7 +32,7 @@ const Laout = (prop) => {
                         }}
                     />
                     <p className="text-gray-300 text-sm sm:text-sm md:text-sm font-medium text-[10px] text-center">
-                        www.{{prop}}.com
+                        www.{prop}.com
                     </p>
                     </div>
 
@@ -43,11 +45,16 @@ const Laout = (prop) => {
                         />
                     </button>
                 </div>
+                
+    
+        
             </div>
+           
         </div>
+        {children}
     </div>
 </div>
   )
 }
 
-export default Laout
+export default Layout

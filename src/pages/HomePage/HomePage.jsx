@@ -9,6 +9,7 @@ import Contact from "../Contact/Contact";
 import Education from "../../components/Education/Education"
 import About from "../About/About";
 import GitHubProfile from "../../components/github/GitHubProfile";
+import Resume from "../Resume/Resume";
 
 const pageVariants = {
   initial: { opacity: 6, scale: 0.9, x: -100 },
@@ -17,9 +18,12 @@ const pageVariants = {
 };
 
 const HomePage = () => {
+
+  const islg = window.innerWidth > 1024;
   const location = useLocation();
   const style = {
     backgroundImage: "url(" + background + ")",
+    backgroundImageOpacity: "0.5",
     backgroundSize: "cover",
     backgroundPosition: "center",
     height: "100vh",
@@ -27,7 +31,7 @@ const HomePage = () => {
   };
 
   return (
-    <div style={style} className="overflow-auto scrollbar-none">
+    <div style={style} className="overflow-auto inset-0 m-auto w-max h-max scrollbar-none">
       <div className="flex flex-col  mx-auto  z-[999]">
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
@@ -44,6 +48,7 @@ const HomePage = () => {
                   <div className="flex flex-col xl:flex-row xl:m-2 xl:gap-9 itmes-center justify-center h-full w-screen sm:h-auto sm:w-auto">
                     <div className="flex flex-col items-center justify-center h-full w-screen sm:h-auto sm:w-auto">
                       <MyInfo />
+                      
                       <Technologies />
                     </div>
                     <div className="flex flex-col items-center justify-center h-full w-screen sm:h-auto sm:w-auto">
@@ -95,6 +100,19 @@ const HomePage = () => {
               }
             />
             <Route
+              path="/resume"
+              element={
+                <motion.div
+                  variants={pageVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                >
+                  <Resume />
+                </motion.div>
+              }
+            />
+            <Route
               path="/github"
               element={
                 <motion.div
@@ -109,7 +127,9 @@ const HomePage = () => {
             />
           </Routes>
         </AnimatePresence>
+        {!islg? "":<div className="h-32"></div>}
         <Footer />
+
       </div>
     </div>
   );

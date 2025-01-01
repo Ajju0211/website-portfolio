@@ -1,56 +1,71 @@
 import React from "react";
-import { Lock, RefreshCcw } from "lucide-react";
 import { useNavigate } from 'react-router-dom';
+import Button from "../../components/Button/Button";
 
+
+const projects = [
+    {
+      "title": "Real-Time Chat Application",
+      "description": "A real-time messaging platform that enables seamless communication with instant message delivery and notifications. Built with modern technologies to ensure responsiveness and scalability.",
+      "link": "url_to_real_time_chat_application_project",
+      "tech_stack": ["Node.js", "Express.js", "Socket.io", "MongoDB","JWT Authentication", "React", "Zoostand"]
+    },
+    {
+      "title": "Crypto Wallet",
+      "description": "A secure and user-friendly cryptocurrency wallet that allows users to store, send, and receive digital currencies. Focused on delivering high-level encryption and ease of use.",
+      "link": "url_to_crypto_wallet_project",
+      "tech_stack": ["React", "Node.js", "MongoDB", "JWT Authentication", "ether.js"]
+    },
+    {
+      "title": "Gemini Clone",
+      "description": "A clone of the Gemini exchange platform offering features like buying, selling, and tracking cryptocurrencies. Designed to mimic the core functionality and user interface of the original platform.",
+      "link": "url_to_gemini_clone_project",
+      "tech_stack": ["React", "Node.js", "Express.js", "MongoDB", "JWT Authentication", "Web3.js", "Gemini API"]
+    }
+  ]
+  
+  
 
 const Projects = () => {
 
     const navigate = useNavigate();
 
     const handleButtonClick = () => {
-      navigate('/');
+        navigate('/');
     };
 
     return (
-        <div className="flex items-center justify-center h-screen w-screen p-2">
-            <div
-                className="flex flex-col bg-[#3c3c3c] bg-opacity-100  border-[#828282] shadow-black rounded-[10px] mb-20 md:h-[80%] md:w-[80%] h-[80%] w-[100%]"
-                style={{ boxShadow: "1px 10px 90px 10px rgba(255, 255, 255,0.1)" }}
-            >
-                <div className="bg-[rgb(40,39,39)] h-10 rounded-tl-[10px] flex items-center justify-evenly pl-5 rounded-tr-[10px] w-full">
-                    <div className="flex md:ml-[-32%] ml-[-15%] relative items-center justify-center gap-2">
-                        <div className="h-3 w-3 rounded-[100%] bg-[#ff0000] cursor-pointer" onClick={handleButtonClick}></div>
-                        <div className="h-3 w-3 rounded-[100%] bg-[#ffcc00]"></div>
-                        <div className="h-3 w-3 rounded-[100%] bg-[#00ff00]"></div>
-                    </div>
-                    <div className="flex flex-row bg-[#3c3c3c] bg-opacity-100 items-center justify-center  border-[#828282] shadow-black rounded-[8px] md:h-[70%] sm:w-[30%] md:w-[34%] lg:w-[30%] h-[70%] w-[50%]">
-                        <div className="inset-y-0 flex-row  justify-evenly h-full w-full left-0 pl-3 flex items-center pointer-events-none">
-                            <div className="flex flex-row items-center gap-2">
-                            <Lock
-                                className="size-4 text-[#828282] hover:text-gray-300 transition-colors duration-300"
-                                style={{
-                                    filter: "drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.3))",
-                                }}
-                            />
-                            <p className="text-gray-300 text-sm sm:text-sm md:text-sm font-medium text-[10px] text-center">
-                                www.about.com
-                            </p>
-                            </div>
+        <section className="py-12 bg-gray-900 text-gray-100 bg-opacity-0 w-full sm:py-12 lg:py-16">
+            <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div className="max-w-xl mx-auto text-center xl:max-w-2xl">
+                    <h2 className="text-3xl font-bold leading-tight text-gray-50 sm:text-4xl bg-transparent bg-gradient-to-r  from-blue-100 via-white-500 to-gray-600 font-[offside] bg-clip-text text-transparent xl:text-5xl mb-6">Projects</h2>
 
-                            <button
-                                aria-label="Reload"
-                                className="relative inline-flex items-center  justify-center w-10 h-10 rounded-full text-[#828282] shadow-md hover:scale-105 transform transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-400"
-                            >
-                                <RefreshCcw
-                                    className="w-5 h-4 md:w-6 md:h-5 animate-spin-slow"
-                                />
-                                <span className="sr-only">Reload</span>
-                            </button>
+                </div>
+                <div
+                    className="grid max-w-4xl lg:max-w-6xl grid-cols-1 mx-auto mt-8 text-center gap-y-4 sm:gap-x-4 sm:grid-cols-2 lg:grid-cols- sm:mt-12 lg:mt-20 sm:text-left">
+                    {projects.map((project) => (
+                    <div key={project.title} className="relative">
+                        <div className="absolute -inset-1">
+                            <div
+                                className="w-full h-full rotate-180 opacity-30 blur-lg filter bg-gradient-to-r from-blue-800 via-pink-500 to-green-600">
+                            </div>
+                        </div>
+                        <div className="relative overflow-hidden bg-[#4e4d51] gap-8 shadow-md rounded-xl h-full">
+                            <div className="p-9">
+                                
+                                <h3 className=" text-2xl font-bold from-blue-100 shadow-sm font-[offside] sm:mt-10">{project.title}</h3>
+                                <h4 className="mt-6 bg-transparent text-clip font-poppins font-light text-xl text-white-600">Tech Stack:- {project.tech_stack.join(",")}</h4>
+                                <p className="mt-6 bg-transparent text-clip font-poppins font-light text-xl text-white-600">{project.description}</p>
+                                    <Button onClick={handleButtonClick} text="View Project" />
+                            </div>
                         </div>
                     </div>
+                    )
+                    )}
+                    
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 
